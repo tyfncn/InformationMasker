@@ -1,4 +1,5 @@
 # Information Masker
+[![Pylint](https://github.com/tyfncn/InformationMasker/actions/workflows/pylint.yml/badge.svg)](https://github.com/tyfncn/InformationMasker/actions/workflows/pylint.yml)
 
 This repo contains a module that masks info from cvs file (hopefuly sql in later versions).
 Masked cvs file can be used for development testing purposes.
