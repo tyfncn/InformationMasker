@@ -10,3 +10,6 @@ $ cd InformationMasker/
 $ python3 -m InformationMasker [input cvs file]
 ```
 
+## Usage as Library and Extending
+[Open-Closed principle](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle) 
+TODO
