@@ -34,7 +34,7 @@ class CvsWriter(OutputWriter):
         # line = self.__separator.join([str(x) for x in item]) + "\n"
         line = ""
         for i in item:
-            line += str(i) + ", "
+            line += str(i) + self.__separator + " "
         line += "\n"
         self.__outfile.write(line)
 
