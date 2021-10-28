@@ -20,3 +20,52 @@ class InputReader:
     def close(self):
         """Completes input"""
         raise NotImplementedError
+
+    def __iter__(self):
+        # needed to run reading function as part of loop
+        return self
+
+    def __next__(self):
+        # needed to run reading function as part of loop
+        buffer = self.read_item()
+        if not buffer:
+            raise StopIteration
+        else:
+            return buffer
+
+
+class CvsReader(InputReader):
+    """
+    Simple CVS backend for InputReader Class. Compatible with different separators
+    """
+    def __init__(self, filename=None, header=None, separator=","):
+        # Open and check CVS file
+        self.__infile = open(filename, "rt")
+        self.__separator = separator
+        self.__header = header
+        assert header is not None, "CVS header needed"
+        file_header = self.read_item()
+        assert file_header == header, "Input file header error.\nExpected:{}\nFound:{}".format(header, file_header)
+
+    def read_item(self):
+        line = self.__infile.readline()
+        if not line:
+            return None
+        formatted_line = [self.guess_type(val) for val in line.split(self.__separator)]
+        assert len(formatted_line) >= len(self.__header), "column count error:{}".format(formatted_line)
+        return formatted_line
+
+    @staticmethod
+    def guess_type(value):
+        """In CVS everything is string. This functions tries to guess type from string in simple terms."""
+        result = value.strip()  # as string
+        try:
+            result = float(value)
+            if result.is_integer():
+                result = int(result)
+        except ValueError:
+            pass
+        return result
+
+    def close(self):
+        self.__infile.close()
