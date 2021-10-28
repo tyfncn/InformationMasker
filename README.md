@@ -1,7 +1,7 @@
 # Information Masker
 [![Pylint](https://github.com/tyfncn/InformationMasker/actions/workflows/pylint.yml/badge.svg)](https://github.com/tyfncn/InformationMasker/actions/workflows/pylint.yml)
 
-This repo contains a module that masks info from cvs file (hopefuly sql in later versions).
+This repo contains a module that masks info from cvs file (hopefully sql in later versions).
 Masked cvs file can be used for development testing purposes.
 
 ## Local Usage - As console app
@@ -10,6 +10,7 @@ git clone https://github.com/tyfncn/InformationMasker.git
 cd InformationMasker/
 python3 -m information_masker [input cvs file]
 ```
+Reads given input file and appends `masked_` fo it's filename for output.
 
 ## Usage as Library and Extending
 Install as pypi package
