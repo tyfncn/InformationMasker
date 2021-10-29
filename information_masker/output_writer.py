@@ -22,7 +22,7 @@ class OutputWriter:
         raise NotImplementedError
 
 
-class CvsWriter(OutputWriter):
+class CsvWriter(OutputWriter):
     """
     Simple CVS backend for OutputWriter Class. Compatible with different separators
     """
@@ -35,7 +35,7 @@ class CvsWriter(OutputWriter):
         line = ""
         for i in item:
             line += str(i) + self.__separator + " "
-        line += "\n"
+        line = line[:-2] + "\n"
         self.__outfile.write(line)
 
     def close(self):

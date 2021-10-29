@@ -34,7 +34,7 @@ class InputReader:
             return buffer
 
 
-class CvsReader(InputReader):
+class CsvReader(InputReader):
     """
     Simple CVS backend for InputReader Class. Compatible with different separators
     """
@@ -45,19 +45,38 @@ class CvsReader(InputReader):
         self.__header = header
         assert header is not None, "CVS header needed"
         file_header = self.read_item()
-        assert file_header == header, "Input file header error.\nExpected:{}\nFound:{}".format(header, file_header)
+        assert file_header == header, "Input file header error.\n" \
+                                      "Expected:{}\nFound:{}".format(header, file_header)
 
     def read_item(self):
+        """ Read input file and return parsed columns as list"""
         line = self.__infile.readline()
         if not line:
             return None
-        formatted_line = [self.guess_type(val) for val in line.split(self.__separator)]
-        assert len(formatted_line) >= len(self.__header), "column count error:{}".format(formatted_line)
+
+        formatted_line = self.parse_items(line)
+        assert len(formatted_line) >= len(self.__header), "column count error:" \
+                                                          "{}".format(formatted_line)
         return formatted_line
+
+    def parse_items(self, line_value):
+        """ split line into array items based on separator given in class constructor"""
+        result = []
+        parsed_column = ""
+        for single_char in line_value:
+            if single_char == self.__separator:
+                result.append(self.guess_type(parsed_column))
+                parsed_column = ""
+            else:
+                parsed_column += single_char
+        if len(parsed_column) > 0:
+            result.append(self.guess_type(parsed_column))
+        return result
 
     @staticmethod
     def guess_type(value):
-        """In CVS everything is string. This functions tries to guess type from string in simple terms."""
+        """In CVS everything is string. This functions tries to guess type from string
+         in simple terms."""
         result = value.strip()  # as string
         try:
             result = float(value)

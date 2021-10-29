@@ -2,8 +2,8 @@
 InformationMasker
 """
 from sys import argv
-from .input_reader import CvsReader
-from .output_writer import CvsWriter
+from .input_reader import CsvReader
+from .output_writer import CsvWriter
 from .statistics import SimpleStatistics
 from .maskers import alpha_numeric_masker
 
@@ -19,8 +19,8 @@ def file_masker(infile):
     try:
         # First pass to get Billing average, some statistics and error check
         header = ['ID', 'Name', 'Email', 'Billing', 'Location']
-        in_file = CvsReader(infile, header)
-        out_file = CvsWriter("masked_" + infile)
+        in_file = CsvReader(infile, header)
+        out_file = CsvWriter("masked_" + infile)
         stats = SimpleStatistics(["Name", "Billing"])
 
         for item in in_file:
@@ -31,8 +31,7 @@ def file_masker(infile):
         in_file.close()
 
         # Second Pass for output
-        in_file = CvsReader(infile, header)
-        in_file.read_item()  # discard cvs header
+        in_file = CsvReader(infile, header)
         out_file.write_item(header)
         for item in in_file:
             masked_item = (

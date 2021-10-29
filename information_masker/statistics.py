@@ -1,5 +1,4 @@
 """More Helper Classes"""
-from math import inf, nan
 
 
 class SimpleStatistics:
@@ -11,8 +10,8 @@ class SimpleStatistics:
         self.columns = {}
         for key in columns:
             self.columns[key] = {
-                "min": inf,
-                "max": -inf,
+                "min": 2**32,   # biggest possible 64 bit integer
+                "max": -2**32,  # smallest possible 64 bit integer
                 "sum": 0,
                 "count": 0
             }
