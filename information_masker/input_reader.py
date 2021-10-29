@@ -30,8 +30,7 @@ class InputReader:
         buffer = self.read_item()
         if not buffer:
             raise StopIteration
-        else:
-            return buffer
+        return buffer
 
 
 class CsvReader(InputReader):
