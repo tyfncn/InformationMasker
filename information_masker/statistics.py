@@ -26,7 +26,7 @@ class SimpleStatistics:
 
     def get_average(self, column):
         if self.columns[column]["count"] == 0:
-            return nan
+            return 0
         return self.columns[column]["sum"] / self.columns[column]["count"]
 
     def column_info(self, column):
