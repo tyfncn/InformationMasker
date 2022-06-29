@@ -11,7 +11,7 @@ git clone https://github.com/tyfncn/InformationMasker.git
 cd InformationMasker/
 python3 -m information_masker [input cvs file]
 ```
-Reads given input file and appends `masked_` fo it's output filename.
+Reads given input file and appends `masked_` to it's output filename.
 
 ## Usage as Library and Extending
 Install as pypi package
